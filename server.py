@@ -1,30 +1,33 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect
 import requests
+import sqlite3
 
+conn = sqlite3.connect('./db/main.db')
+db = conn.cursor()
 app = Flask(__name__)
 
-# PATH_TO_DATABASE = './proxy/database.json'
+def query(string):
+    db.execute(string) # run SQL query
+    conn.commit() # save changes
+    return db.fetchone() # returns None if query is empty
+
+def generate_db():
+    query('''CREATE TABLE stocks (date text, trans text, symbol text, qty real, price real)''') # Create table
+    query("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)") # Insert a row of data
 
 @app.route("/")
 def home():
+    return redirect("/main")
+
+@app.route("/main")
+def main():
     return render_template("index.html")
 
 @app.route("/add", methods=["POST"])
 def add():
-    # admin_username = request.form.get("admin_username")
-    # admin_password = request.form.get("admin_password")
-    # blocked_site = request.form.get("blocked_site")
-    # clear_cache = request.form.get("clear_cache")
-    # user_username = request.form.get("user_username")
-    # user_password = request.form.get("user_password")
-    # new_site = request.form.get("new_site")
-
+    # sample = request.form.get("sample")
     return redirect("/main")
-
-
-# @app.route("/main")
-# def proxy_settings():
 #     # pm = ProxyManager(PATH_TO_DATABASE) 
     
 #     return render_template("proxy-settings.html",
