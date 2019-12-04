@@ -1,0 +1,33 @@
+        {% include './partials/head.html' %}
+        {% include './partials/navbar.html' %}
+        <div>
+        <h3>Orders</h3> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">New Order</button>
+        </div>
+         <ul class="list-group">
+            {% for l in orders %}
+                <li class="list-group-item">{{l}}<span class="badge">X</span></li></br>
+            {% endfor %}
+        </ul>
+
+         <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <form role="form" action="/order" method="post">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Input Fields Here</p>
+                            <input type="text" class="form-control" placeholder="Sample" name="order_sample">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Place Order</button>
+                        </div>   
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {% include './partials/foot.html' %}

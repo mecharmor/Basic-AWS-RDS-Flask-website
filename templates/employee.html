@@ -1,0 +1,16 @@
+        {% include './partials/head.html' %}
+        {% include './partials/navbar.html' %}
+        <h1>employees</h1>
+         <ul class="list-group">
+            {% for l in employees %}
+                <li class="list-group-item">{{l}}<span class="badge">X</span></li></br>
+            {% endfor %}
+        </ul>
+        <h1>Employee Types</h1>
+         <ul class="list-group">
+            {% for l in employee_types %}
+                <li class="list-group-item">{{l}}<span class="badge">X</span></li></br>
+            {% endfor %}
+        </ul>
+
+        {% include './partials/foot.html' %}
