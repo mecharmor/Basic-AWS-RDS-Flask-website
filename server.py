@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect
 import requests
 app = Flask(__name__)
 import pymysql
+import random
 
 class Database:
     def __init__(self):
@@ -20,7 +21,18 @@ class Database:
     def getEmployees(self):
         return self.query("SELECT * FROM sys.Employee;")
     def getOrders(self):
-        return self.query("SELECT * FROM sys.Orders;")
+        return self.query("""
+            SELECT 
+            O.order_id AS order_number,
+            E.first_name AS cashier_name,
+            O.receipt_id AS receipt,
+            SUM(M.cost) AS total_cost,
+            O.order_is_complete AS completed
+            FROM sys.Employee E
+            INNER JOIN sys.Orders O ON E.employee_id = O.employee_id
+            INNER JOIN sys.Menu M ON O.menu_id = M.menu_id
+            GROUP BY O.receipt_id;
+                         """)
     def getMenu(self):
         return self.query("SELECT * FROM sys.Menu;")
     def getMenuItems(self):
@@ -29,8 +41,10 @@ class Database:
         return self.query("SELECT * FROM sys.Employee_Type;")
     def getInventory(self):
         return self.query("SELECT * FROM sys.Inventory;")
-    def completeOrder(self, order_id):
-        self.query("UPDATE Orders O SET O.Order_is_complete = 1 WHERE O.order_id = " + order_id + ";")
+    def completeOrder(self, receipt):
+        self.query(r"UPDATE sys.Orders O SET O.order_is_complete=1 WHERE O.receipt_id='" + str(receipt) + r"';")
+    def markIncompleteOrder(self, receipt):
+        self.query(r"UPDATE sys.Orders O SET O.order_is_complete=0 WHERE O.receipt_id='" + str(receipt) + r"';")
 
 db = Database()
 
@@ -61,16 +75,21 @@ def inventory():
 @app.route("/order", methods=["POST"])
 def place_order():
     order_sample = request.form.get("order_sample")
+    receipt = "%032x" % random.getrandbits(127) # generated receipt
     print("Sample output: " + str(order_sample))
 
     return redirect("/order")
 
 @app.route("/complete_order", methods=["POST"])
 def complete_order():
-    order_id = request.form.get("order_id")
+    receipt = request.form.get("receipt")
+    db.completeOrder(receipt)
+    return redirect("/order")
 
-    print("id: " + str(order_id))
-
+@app.route("/incomplete_order", methods=["POST"])
+def incomplete_order():
+    receipt = request.form.get("receipt")
+    db.markIncompleteOrder(receipt)
     return redirect("/order")
 
 if __name__ == "__main__":
