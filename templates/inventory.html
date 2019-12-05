@@ -1,10 +1,26 @@
         {% include './partials/head.html' %}
         {% include './partials/navbar.html' %}
+
         <h1>Inventory</h1>
-         <ul class="list-group">
-            {% for l in inventory %}
-                <li class="list-group-item">{{l}}<span class="badge">X</span></li></br>
-            {% endfor %}
-        </ul>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">UPC-A Barcode</th>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Updated On</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in inventory %}
+                    <tr>
+                        <th scope="row">{{emp['inventory_id']}}</th>
+                        <th scope="row">{{emp['name']}}</th>
+                        <th scope="row">{{emp['quantity']}}</th>
+                        <th scope="row">{{emp['Last_modification']}}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
         {% include './partials/foot.html' %}
