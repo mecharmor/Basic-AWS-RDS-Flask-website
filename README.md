@@ -1,18 +1,8 @@
 # CSC675 Introduction To Databases
 
-## Final Project
+## Final Project for CSC 675
 
-### Insert info here
-
-- list 1
-- list 2
-- list 3
-
-### Team Members
-
-- Cory Lewis
-- insert here...
-- insert here...
-- insert here...
+###
+website created in python 3.7 using Flask and MySQL for the database. Front end designed using HTML, CSS, JAVASCRIPT, and BOOTSTRAP 4
 
 > Updated On: 11/24/2019 By `Cory Lewis`
