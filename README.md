@@ -2,7 +2,21 @@
 
 ## Final Project for CSC 675
 
-###
-website created in python 3.7 using Flask and MySQL for the database. Front end designed using HTML, CSS, JAVASCRIPT, and BOOTSTRAP 4
+## Stack Reference
+- Front End
+  - HTML 5
+  - CSS3
+  - Bootstrap 4
+  - Flask Templating Engine
+ - Back End
+  - Python `v3.7` w/Flask
+  - MySQL
 
-> Updated On: 11/24/2019 By `Cory Lewis`
+## Getting Started `(Mac/Linux Terminal)`
+```
+$ git clone https://github.com/mecharmor/CSC675-Database
+$ python3 server.py
+(ctrl+click generated URL)
+```
+
+> Updated On: 12/11/2019 By `Cory Lewis`
