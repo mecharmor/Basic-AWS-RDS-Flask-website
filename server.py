@@ -7,9 +7,9 @@ import random
 
 class Database:
     def __init__(self):
-        host = "rds-mysql-csc675.c4pugfa5ehgs.us-west-1.rds.amazonaws.com"
-        user = "CSC675Database"
-        password = "management"
+        host = "host_info_here"
+        user = "user_name_here"
+        password = "password_here"
         db = "sys"
         self.con = pymysql.connect(host=host, user=user, password=password, db=db, cursorclass=pymysql.cursors.
                                    DictCursor)
