@@ -96,24 +96,3 @@ if __name__ == "__main__":
     app.run()
 
 
-
-
-
-
-
-
-
-# import sqlite3
-
-# conn = sqlite3.connect('./db/main.db')
-# db = conn.cursor()
-
-# def query(string):
-#     db.execute(string) # run SQL query
-#     conn.commit() # save changes
-#     return db.fetchone() # returns None if query is empty
-
-# def generate_db():
-#     query('''CREATE TABLE stocks (date text, trans text, symbol text, qty real, price real)''') # Create table
-#     query("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)") # Insert a row of data
-
