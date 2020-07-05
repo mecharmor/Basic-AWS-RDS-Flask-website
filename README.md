@@ -1,6 +1,6 @@
-# CSC675 Introduction To Databases
+# Basic Flask
 
-## Final Project for CSC 675
+The purpose of this project is to learn some basics of flask and connecting to an AWS RDS instance for querying
 
 ## Stack Reference
 - Front End
